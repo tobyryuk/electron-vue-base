@@ -62,6 +62,7 @@ if (process.env.NODE_ENV !== 'production') {
   mainConfig.mode = 'development'
   mainConfig.plugins.push(
     new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"development"',
       '__static': `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`
     })
   )
