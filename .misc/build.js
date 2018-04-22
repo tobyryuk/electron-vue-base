@@ -4,7 +4,7 @@ const chalk = require('chalk')
 const del = require('del')
 const { spawn } = require('child_process')
 const webpack = require('webpack')
-const Multispinner = require('multispinner')
+const multispinner = require('multispinner')
 
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
@@ -27,7 +27,7 @@ function build () {
   del.sync(['dist/electron/*', '!.gitkeep'])
 
   const tasks = ['main', 'renderer']
-  const m = new Multispinner(tasks, {
+  const m = new multispinner(tasks, {
     preText: 'building',
     postText: 'process'
   })
