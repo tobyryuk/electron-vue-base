@@ -45,14 +45,14 @@ function startRenderer () {
       heartbeat: 2500 
     })
 
-    compiler.plugin('compilation', compilation => {
-      compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
+    compiler.hooks.compilation.tap('electron-vue-base', compilation => {
+      compilation.hooks.htmlWebpackPluginAfterEmit.tapAsync('electron-vue-base', (compiler, callback) => {
         hotMiddleware.publish({ action: 'reload' })
-        cb()
+        callback()
       })
     })
 
-    compiler.plugin('done', stats => {
+    compiler.hooks.done.tap('electron-vue-base', stats => {
       logStats('Renderer', stats)
     })
 
@@ -80,7 +80,7 @@ function startMain () {
 
     const compiler = webpack(mainConfig)
 
-    compiler.plugin('watch-run', (compilation, done) => {
+    compiler.hooks.watchRun.tapAsync('electron-vue-base', (compilation, done) => {
       logStats('Main', chalk.white.bold('compiling...'))
       hotMiddleware.publish({ action: 'compiling' })
       done()
