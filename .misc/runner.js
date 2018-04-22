@@ -3,7 +3,7 @@ const electron = require('electron')
 const path = require('path')
 const { spawn } = require('child_process')
 const webpack = require('webpack')
-const WebpackDevServer = require('webpack-dev-server')
+const webpackDevServer = require('webpack-dev-server')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const mainConfig = require('./webpack.main.config')
@@ -56,7 +56,7 @@ function startRenderer () {
       logStats('Renderer', stats)
     })
 
-    const server = new WebpackDevServer(
+    const server = new webpackDevServer(
       compiler,
       {
         contentBase: path.join(__dirname, '../'),
